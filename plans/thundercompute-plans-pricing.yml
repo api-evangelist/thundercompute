@@ -1,0 +1,180 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Thunder Compute
+providerId: thundercompute
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: true
+tags:
+- GPU
+- Cloud
+- Infrastructure
+- AI
+- Compute
+- Plans
+description: >-
+  Thunder Compute uses a transparent, usage-based pricing model. On-demand
+  virtual GPU instances are billed per minute at a fixed per-GPU-hour rate
+  that depends on the GPU model and the instance tier (development /
+  prototyping vs. production). The first 4 vCPUs and 100GB of storage are
+  included; additional vCPUs, additional persistent storage, and snapshots
+  are metered separately. There are no data egress fees. There are no formal
+  Free / Developer / Enterprise subscription tiers; users add a payment method
+  and pay only for running instances and stored data.
+notes: >-
+  Per-GPU-hour rates reconciled against the public Thunder Compute pricing
+  page on 2026-06-21. GPU availability and rates change; the live
+  GET /v1/pricing endpoint and the pricing page are authoritative.
+sources:
+- https://www.thundercompute.com/pricing
+- https://www.thundercompute.com/docs
+- https://api.thundercompute.com:8443/v1/pricing
+plans:
+- id: thundercompute-development
+  name: Development (Prototyping) GPU Instances
+  type: usage
+  description: >-
+    On-demand single- or multi-GPU instances for prototyping and
+    experimentation, billed per minute at the development per-GPU-hour rate.
+  entries:
+  - label: RTX A6000 (48GB)
+    name: gpu_a6000
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $0.35 per GPU/hour
+    userMultiplied: false
+  - label: A100 80GB
+    name: gpu_a100_80gb
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $0.78 per GPU/hour
+    userMultiplied: false
+  - label: L40 (48GB)
+    name: gpu_l40
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $0.89 per GPU/hour
+    userMultiplied: false
+  - label: H100 PCIe (80GB)
+    name: gpu_h100_pcie
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $1.38 per GPU/hour
+    userMultiplied: false
+  elements:
+  - name: Instances API
+  - name: Snapshots API
+  - name: tnr CLI
+- id: thundercompute-production
+  name: Production GPU Instances
+  type: usage
+  description: >-
+    Higher-performance production-tier instances (including NVLink
+    configurations) billed per minute at the production per-GPU-hour rate.
+  entries:
+  - label: L40 (48GB)
+    name: gpu_l40_prod
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $1.39 per GPU/hour
+    userMultiplied: false
+  - label: A100 80GB NVLink
+    name: gpu_a100_80gb_nvlink
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $1.79 per GPU/hour
+    userMultiplied: false
+  - label: H100 PCIe NVLink (80GB)
+    name: gpu_h100_pcie_nvlink
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $2.49 per GPU/hour
+    userMultiplied: false
+  elements:
+  - name: Instances API
+  - name: Snapshots API
+- id: thundercompute-resources
+  name: Compute, Storage and Snapshots
+  type: usage
+  description: >-
+    Per-resource add-ons metered alongside GPU instances. First 4 vCPUs and
+    100GB of storage are included per instance; usage beyond the included
+    amounts is billed separately.
+  entries:
+  - label: Additional vCPU
+    name: extra_vcpu
+    type: usage
+    metric: vcpu_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 1
+    price: $0.06 per vCPU/hour (first 4 vCPUs included, 8GB RAM per vCPU)
+    userMultiplied: false
+  - label: Additional Persistent Storage
+    name: extra_storage
+    type: usage
+    metric: storage_gb_hours
+    limit: -1
+    timeFrame: hour
+    geo: global
+    unit: 100
+    price: $0.03 per 100GB/hour (first 100GB included, charged while running)
+    userMultiplied: false
+  - label: Snapshots
+    name: snapshots
+    type: usage
+    metric: storage_gb_months
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.05 per GB/month
+    userMultiplied: false
+  - label: Data Egress
+    name: egress
+    type: usage
+    metric: gigabytes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.00 (no egress fees)
+    userMultiplied: false
+  elements:
+  - name: Per-minute billing
+  - name: vCPU
+  - name: Storage
+  - name: Snapshots
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

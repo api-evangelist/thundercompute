@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Thunder Compute
+providerId: thundercompute
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- GPU
+- Cloud
+- Infrastructure
+- AI
+- Compute
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Thunder Compute does not publish explicit numeric request-per-minute rate
+  limits for its REST API. The primary constraints are account-level resource
+  quotas - the number and type of GPU instances an account may provision
+  concurrently - which are governed by available GPU capacity, the account's
+  tier/standing, and payment status rather than by API call throttling. New
+  accounts may have lower concurrent-instance and GPU-type quotas that are
+  raised on request. Specific numeric limits are not reconciled in this
+  artifact.
+notes: >-
+  No public rate-limit documentation page exists as of 2026-06-21. Verify
+  concurrent-instance and GPU quotas in the Thunder Compute console or with
+  support; honor HTTP 429 responses with backoff if returned.
+sources:
+- https://www.thundercompute.com/docs
+- https://www.thundercompute.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: Concurrent Instances
+  scope: account
+  metric: instances
+  limit: see provider console
+  notes: Number of simultaneously running GPU instances; governed by quota and available capacity.
+- name: GPU Type Availability
+  scope: account
+  metric: gpus
+  limit: see provider console
+  notes: Access to specific GPU models (e.g. H100, A100) may be gated by account tier and inventory.
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No documented per-minute REST request cap; clients should still handle 429 with backoff.
+policies:
+- name: Quota-Based Limits
+  description: Constraints are primarily concurrent-instance and GPU-type quotas, raised on request as accounts establish history and spend.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After if a 429 is returned.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

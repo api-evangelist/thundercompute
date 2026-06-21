@@ -1,0 +1,282 @@
+{
+  "info": {
+    "name": "Thunder Compute API",
+    "description": "REST API for Thunder Compute on-demand virtual GPU instances. Base URL https://api.thundercompute.com:8443/v1 with Bearer token auth.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.thundercompute.com:8443/v1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Instances",
+      "item": [
+        {
+          "name": "Create a new on-demand GPU instance.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instances/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["instances", "create"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gpu_type\": \"a100\",\n  \"num_gpus\": 1,\n  \"cpu_cores\": 4,\n  \"disk_size_gb\": 100,\n  \"mode\": \"prototyping\",\n  \"template\": \"base\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List all instances for the account.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/instances/list",
+              "host": ["{{baseUrl}}"],
+              "path": ["instances", "list"]
+            }
+          }
+        },
+        {
+          "name": "Modify an existing instance configuration.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instances/:id/modify",
+              "host": ["{{baseUrl}}"],
+              "path": ["instances", ":id", "modify"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The instance identifier." }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Delete an instance.",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/instances/:id/delete",
+              "host": ["{{baseUrl}}"],
+              "path": ["instances", ":id", "delete"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The instance identifier." }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add an SSH key to a specific instance.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instances/:id/add_key",
+              "host": ["{{baseUrl}}"],
+              "path": ["instances", ":id", "add_key"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The instance identifier." }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"public_key\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Atomically update forwarded HTTP ports.",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/instances/:id/ports",
+              "host": ["{{baseUrl}}"],
+              "path": ["instances", ":id", "ports"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The instance identifier." }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"add_ports\": [],\n  \"remove_ports\": []\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Snapshots",
+      "item": [
+        {
+          "name": "Create a snapshot from a running instance.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/snapshots/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["snapshots", "create"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instanceId\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List all snapshots.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/snapshots/list",
+              "host": ["{{baseUrl}}"],
+              "path": ["snapshots", "list"]
+            }
+          }
+        },
+        {
+          "name": "Delete a snapshot.",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/snapshots/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["snapshots", ":id"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The snapshot identifier." }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get available Thunder templates.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/thunder-templates",
+              "host": ["{{baseUrl}}"],
+              "path": ["thunder-templates"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Account",
+      "item": [
+        {
+          "name": "Add an SSH key to the account.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/keys/add",
+              "host": ["{{baseUrl}}"],
+              "path": ["keys", "add"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List account SSH keys.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/keys/list",
+              "host": ["{{baseUrl}}"],
+              "path": ["keys", "list"]
+            }
+          }
+        },
+        {
+          "name": "Delete an account SSH key.",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/keys/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["keys", ":id"],
+              "variable": [
+                { "key": "id", "value": "", "description": "The SSH key identifier." }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List API tokens.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/tokens",
+              "host": ["{{baseUrl}}"],
+              "path": ["tokens"]
+            }
+          }
+        },
+        {
+          "name": "Get current GPU pricing.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/pricing",
+              "host": ["{{baseUrl}}"],
+              "path": ["pricing"]
+            }
+          }
+        },
+        {
+          "name": "Get available GPU specifications.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/specs",
+              "host": ["{{baseUrl}}"],
+              "path": ["specs"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

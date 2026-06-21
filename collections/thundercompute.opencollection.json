@@ -1,0 +1,288 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thunder Compute API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new on-demand GPU instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thundercompute.com:8443/v1/instances/create",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"gpu_type\": \"a100\",\n  \"num_gpus\": 1,\n  \"cpu_cores\": 4,\n  \"disk_size_gb\": 100,\n  \"mode\": \"prototyping\",\n  \"template\": \"base\"\n}"
+            }
+          },
+          "docs": "Create a new on-demand GPU instance."
+        },
+        {
+          "info": {
+            "name": "List all instances for the account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/instances/list"
+          },
+          "docs": "List all instances for the account."
+        },
+        {
+          "info": {
+            "name": "Modify an existing instance configuration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thundercompute.com:8443/v1/instances/:id/modify",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The instance identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify an existing instance configuration."
+        },
+        {
+          "info": {
+            "name": "Delete an instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thundercompute.com:8443/v1/instances/:id/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The instance identifier."
+              }
+            ]
+          },
+          "docs": "Delete an instance."
+        },
+        {
+          "info": {
+            "name": "Add an SSH key to a specific instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thundercompute.com:8443/v1/instances/:id/add_key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The instance identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\n  \"public_key\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Add an SSH key to a specific instance."
+        },
+        {
+          "info": {
+            "name": "Atomically update forwarded HTTP ports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.thundercompute.com:8443/v1/instances/:id/ports",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The instance identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\n  \"add_ports\": [],\n  \"remove_ports\": []\n}"
+            }
+          },
+          "docs": "Atomically add or remove forwarded HTTP ports for an instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a snapshot from a running instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thundercompute.com:8443/v1/snapshots/create",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"instanceId\": \"<string>\",\n  \"name\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Create a snapshot from a running instance."
+        },
+        {
+          "info": {
+            "name": "List all snapshots.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/snapshots/list"
+          },
+          "docs": "List all snapshots for the account."
+        },
+        {
+          "info": {
+            "name": "Delete a snapshot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.thundercompute.com:8443/v1/snapshots/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The snapshot identifier."
+              }
+            ]
+          },
+          "docs": "Delete a snapshot."
+        },
+        {
+          "info": {
+            "name": "Get available Thunder templates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/thunder-templates"
+          },
+          "docs": "Get available Thunder templates for instance creation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add an SSH key to the account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.thundercompute.com:8443/v1/keys/add",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Add an SSH key to the account."
+        },
+        {
+          "info": {
+            "name": "List account SSH keys.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/keys/list"
+          },
+          "docs": "List account SSH keys."
+        },
+        {
+          "info": {
+            "name": "Delete an account SSH key.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.thundercompute.com:8443/v1/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The SSH key identifier."
+              }
+            ]
+          },
+          "docs": "Delete an account SSH key."
+        },
+        {
+          "info": {
+            "name": "List API tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/tokens"
+          },
+          "docs": "List API tokens for the account."
+        },
+        {
+          "info": {
+            "name": "Get current GPU pricing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/pricing"
+          },
+          "docs": "Get current GPU pricing."
+        },
+        {
+          "info": {
+            "name": "Get available GPU specifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/specs"
+          },
+          "docs": "Get available GPU specifications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

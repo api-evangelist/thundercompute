@@ -1,0 +1,110 @@
+aid: thundercompute
+name: Thunder Compute
+review:
+  question: Does Thunder Compute expose a documented public REST API, or is the surface CLI-only?
+  answer: true
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No streaming, Server-Sent Events, or WebSocket surface is documented for
+    Thunder Compute. The platform is request/response REST plus a CLI, so no
+    AsyncAPI document was created.
+findings:
+  summary: |
+    Thunder Compute exposes BOTH a documented public REST API and a CLI, and
+    they are not mutually exclusive - the tnr CLI and the official Thunder
+    Compute Terraform provider are clients of the same REST API. The REST API
+    is served at https://api.thundercompute.com:8443/v1 with a machine-readable
+    OpenAPI document published at
+    https://api.thundercompute.com:8443/openapi.json. Authentication is a
+    Bearer API token generated in the console
+    (console.thundercompute.com/settings/tokens); the CLI reads the same token
+    from the TNR_API_TOKEN environment variable.
+
+    The REST surface covers GPU instance lifecycle (create, list, modify,
+    delete), attaching SSH keys to an instance, atomically updating forwarded
+    HTTP ports, snapshot create/list/delete, account SSH key add/list/delete,
+    listing API tokens, and read-only pricing, GPU specifications, and Thunder
+    templates. Notably there is no dedicated start/stop endpoint in the
+    published spec - power-state changes are handled via the CLI / console and
+    instance creation/deletion; modify changes configuration rather than power
+    state.
+
+    The tnr CLI remains the primary and most-documented developer experience
+    (login, create, status, connect, scp, snapshot, delete), with a full CLI
+    reference at thundercompute.com/docs/cli-reference. For programmatic
+    automation, the REST API and Terraform provider are the supported paths.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.thundercompute.com:8443/v1
+      documented: true
+    - protocol: CLI
+      scheme: tnr
+      note: Official tnr command-line interface (Go), a client of the REST API; primary documented developer surface.
+      documented: true
+    - protocol: Terraform
+      scheme: provider
+      note: Official terraform-provider-thundercompute wraps the same REST API for infrastructure-as-code.
+      documented: true
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming surface is documented.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented.
+  endpointsConfirmedRest:
+    - POST   https://api.thundercompute.com:8443/v1/instances/create
+    - GET    https://api.thundercompute.com:8443/v1/instances/list
+    - POST   https://api.thundercompute.com:8443/v1/instances/{id}/modify
+    - POST   https://api.thundercompute.com:8443/v1/instances/{id}/delete
+    - POST   https://api.thundercompute.com:8443/v1/instances/{id}/add_key
+    - PATCH  https://api.thundercompute.com:8443/v1/instances/{id}/ports
+    - POST   https://api.thundercompute.com:8443/v1/snapshots/create
+    - GET    https://api.thundercompute.com:8443/v1/snapshots/list
+    - DELETE https://api.thundercompute.com:8443/v1/snapshots/{id}
+    - GET    https://api.thundercompute.com:8443/v1/thunder-templates
+    - POST   https://api.thundercompute.com:8443/v1/keys/add
+    - GET    https://api.thundercompute.com:8443/v1/keys/list
+    - DELETE https://api.thundercompute.com:8443/v1/keys/{id}
+    - GET    https://api.thundercompute.com:8443/v1/tokens
+    - GET    https://api.thundercompute.com:8443/v1/pricing
+    - GET    https://api.thundercompute.com:8443/v1/specs
+  cliSurface:
+    - tnr login / tnr logout
+    - tnr create
+    - tnr status
+    - tnr connect <id>
+    - tnr scp
+    - tnr snapshot
+    - tnr delete <id>
+sources:
+  - url: https://www.thundercompute.com/docs
+    type: Documentation
+    note: Documentation index; references the REST API, snapshots, instances, and templates.
+  - url: https://www.thundercompute.com/docs/cli-reference
+    type: Documentation
+    note: tnr CLI reference; describes login/token auth and instance management commands.
+  - url: https://api.thundercompute.com:8443/openapi.json
+    type: APIReference
+    note: Machine-readable OpenAPI document; base server https://api.thundercompute.com:8443/v1, Bearer ApiKeyAuth.
+  - url: https://github.com/Thunder-Compute/thunder-cli
+    type: SourceCode
+    note: Official CLI (Go), a client of the REST API.
+  - url: https://github.com/Thunder-Compute/terraform-provider-thundercompute
+    type: SourceCode
+    note: Official Terraform provider wrapping the same REST API, confirming a stable programmatic surface.
+  - url: https://www.thundercompute.com/pricing
+    type: Documentation
+    note: Per-GPU-hour pricing reconciled into plans and finops artifacts.
+actions:
+  apisYmlUpdated: true
+  reason: |
+    The public surface is a documented REST API plus a CLI (and Terraform
+    provider) over the same API. Four sub-APIs were catalogued - Instances,
+    Snapshots, Account utilities, and the tnr CLI - and an OpenAPI document
+    was authored from the published openapi.json. No AsyncAPI was created
+    because no streaming/WebSocket surface is documented.

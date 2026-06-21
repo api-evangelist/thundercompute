@@ -1,0 +1,127 @@
+aid: thundercompute
+url: https://raw.githubusercontent.com/api-evangelist/thundercompute/refs/heads/main/apis.yml
+name: Thunder Compute
+kind: company
+description: Thunder Compute is a low-cost GPU cloud offering on-demand virtual GPU
+  instances (T4, A6000, A100 80GB, L40, H100 PCIe) billed per minute. Developers
+  provision and manage instances primarily through the tnr CLI, with a documented
+  REST API at https://api.thundercompute.com:8443/v1 for creating, listing,
+  modifying, and deleting instances, managing snapshots and SSH keys, and reading
+  pricing/specs. A Terraform provider wraps the same API.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- GPU
+- Cloud
+- Infrastructure
+- AI
+- Compute
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: thundercompute:thundercompute-instances-api
+  name: Thunder Compute Instances API
+  tags:
+  - Instances
+  - GPU
+  - Compute
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  properties:
+  - url: https://www.thundercompute.com/docs
+    type: Documentation
+  - url: https://api.thundercompute.com:8443/openapi.json
+    type: APIReference
+  - url: openapi/thundercompute-openapi.yml
+    type: OpenAPI
+  - url: collections/thundercompute.postman_collection.json
+    type: PostmanCollection
+  - url: collections/thundercompute.opencollection.json
+    type: OpenCollection
+  description: REST endpoints to create, list, modify, and delete on-demand virtual
+    GPU instances, add SSH keys to an instance, and update forwarded HTTP ports.
+    Instance configuration covers GPU type, GPU count, vCPU cores, disk size, and
+    development vs. production mode.
+- aid: thundercompute:thundercompute-snapshots-api
+  name: Thunder Compute Snapshots API
+  tags:
+  - Snapshots
+  - Storage
+  - Templates
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  properties:
+  - url: https://www.thundercompute.com/docs
+    type: Documentation
+  - url: https://api.thundercompute.com:8443/openapi.json
+    type: APIReference
+  - url: openapi/thundercompute-openapi.yml
+    type: OpenAPI
+  - url: collections/thundercompute.postman_collection.json
+    type: PostmanCollection
+  - url: collections/thundercompute.opencollection.json
+    type: OpenCollection
+  description: Create, list, and delete snapshots captured from running instances
+    for long-term storage, plus read available Thunder templates used to seed new
+    instances.
+- aid: thundercompute:thundercompute-account-api
+  name: Thunder Compute Account API
+  tags:
+  - SSH Keys
+  - Tokens
+  - Pricing
+  - Specs
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  properties:
+  - url: https://www.thundercompute.com/docs
+    type: Documentation
+  - url: https://api.thundercompute.com:8443/openapi.json
+    type: APIReference
+  - url: openapi/thundercompute-openapi.yml
+    type: OpenAPI
+  - url: collections/thundercompute.postman_collection.json
+    type: PostmanCollection
+  - url: collections/thundercompute.opencollection.json
+    type: OpenCollection
+  description: Account-level utility endpoints to add, list, and delete account SSH
+    keys, list API tokens, and read current GPU pricing and hardware specifications.
+- aid: thundercompute:thundercompute-cli
+  name: Thunder Compute CLI (tnr)
+  tags:
+  - CLI
+  - tnr
+  - Developer Tools
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.thundercompute.com/docs/cli-reference
+  baseURL: https://api.thundercompute.com:8443/v1
+  properties:
+  - url: https://www.thundercompute.com/docs/cli-reference
+    type: Documentation
+  - url: https://github.com/Thunder-Compute/thunder-cli
+    type: SourceCode
+  description: The tnr command-line interface is the primary developer surface for
+    Thunder Compute, wrapping the REST API to log in, create, connect to, snapshot,
+    and delete GPU instances and transfer files. Authenticates with an API token
+    set via TNR_API_TOKEN.
+common:
+- type: GitHubOrganization
+  url: https://github.com/Thunder-Compute
+- type: LinkedIn
+  url: https://www.linkedin.com/company/thunder-compute
+- type: Website
+  url: https://www.thundercompute.com
+- type: Documentation
+  url: https://www.thundercompute.com/docs
+- type: Plans
+  url: plans/thundercompute-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/thundercompute-rate-limits.yml
+- type: FinOps
+  url: finops/thundercompute-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
