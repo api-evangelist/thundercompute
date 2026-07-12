@@ -108,6 +108,10 @@ apis:
     and delete GPU instances and transfer files. Authenticates with an API token
     set via TNR_API_TOKEN.
 common:
+- type: DomainSecurity
+  url: security/thundercompute-domain-security.yml
+- type: Authentication
+  url: authentication/thundercompute-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/Thunder-Compute
 - type: LinkedIn
@@ -122,6 +126,8 @@ common:
   url: rate-limits/thundercompute-rate-limits.yml
 - type: FinOps
   url: finops/thundercompute-finops.yml
+- type: Blog
+  url: https://www.thundercompute.com/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

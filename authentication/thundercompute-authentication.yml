@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/thundercompute-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: ApiKeyAuth
+  type: http
+  scheme: bearer
+  description: API token generated in the Thunder Compute console (console.thundercompute.com/settings/tokens),
+    sent as a Bearer token in the Authorization header. The tnr CLI reads it from the TNR_API_TOKEN
+    environment variable.
+  sources:
+  - openapi/thundercompute-openapi.yml
