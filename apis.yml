@@ -108,6 +108,8 @@ apis:
     and delete GPU instances and transfer files. Authenticates with an API token
     set via TNR_API_TOKEN.
 common:
+- type: AgenticAccess
+  url: agentic-access/thundercompute-agentic-access.yml
 - type: DomainSecurity
   url: security/thundercompute-domain-security.yml
 - type: Authentication
