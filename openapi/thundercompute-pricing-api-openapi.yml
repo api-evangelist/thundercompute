@@ -1,0 +1,35 @@
+openapi: 3.0.1
+info:
+  title: Thunder Compute Instances Pricing API
+  description: REST API for Thunder Compute, a low-cost GPU cloud offering on-demand virtual GPU instances billed per minute. The API manages instance lifecycle (create, list, modify, delete), SSH key attachment, forwarded HTTP ports, snapshots, account SSH keys, API tokens, and read-only pricing and GPU specifications. The tnr CLI and the Thunder Compute Terraform provider are both clients of this same API. Endpoints and schemas mirror the published OpenAPI document at https://api.thundercompute.com:8443/openapi.json.
+  termsOfService: https://www.thundercompute.com/terms
+  contact:
+    name: Thunder Compute Support
+    email: support@thundercompute.com
+  version: '1.0'
+servers:
+- url: https://api.thundercompute.com:8443/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Pricing
+paths:
+  /pricing:
+    get:
+      operationId: getPricing
+      tags:
+      - Pricing
+      summary: Get current GPU pricing.
+      responses:
+        '200':
+          description: Current pricing
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      description: API token generated in the Thunder Compute console (console.thundercompute.com/settings/tokens), sent as a Bearer token in the Authorization header. The tnr CLI reads it from the TNR_API_TOKEN environment variable.

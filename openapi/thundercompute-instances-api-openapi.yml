@@ -1,0 +1,265 @@
+openapi: 3.0.1
+info:
+  title: Thunder Compute Instances API
+  description: REST API for Thunder Compute, a low-cost GPU cloud offering on-demand virtual GPU instances billed per minute. The API manages instance lifecycle (create, list, modify, delete), SSH key attachment, forwarded HTTP ports, snapshots, account SSH keys, API tokens, and read-only pricing and GPU specifications. The tnr CLI and the Thunder Compute Terraform provider are both clients of this same API. Endpoints and schemas mirror the published OpenAPI document at https://api.thundercompute.com:8443/openapi.json.
+  termsOfService: https://www.thundercompute.com/terms
+  contact:
+    name: Thunder Compute Support
+    email: support@thundercompute.com
+  version: '1.0'
+servers:
+- url: https://api.thundercompute.com:8443/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Instances
+paths:
+  /instances/create:
+    post:
+      operationId: createInstance
+      tags:
+      - Instances
+      summary: Create a new on-demand GPU instance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceCreateRequest'
+      responses:
+        '200':
+          description: Instance created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceCreateResponse'
+  /instances/list:
+    get:
+      operationId: listInstances
+      tags:
+      - Instances
+      summary: List all instances for the authenticated account.
+      responses:
+        '200':
+          description: A list of instances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceListResponse'
+  /instances/{id}/modify:
+    post:
+      operationId: modifyInstance
+      tags:
+      - Instances
+      summary: Modify an existing instance configuration.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceModifyRequest'
+      responses:
+        '200':
+          description: Instance modified
+          content:
+            application/json:
+              schema:
+                type: object
+  /instances/{id}/delete:
+    post:
+      operationId: deleteInstance
+      tags:
+      - Instances
+      summary: Delete an instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Instance deleted
+          content:
+            application/json:
+              schema:
+                type: object
+  /instances/{id}/add_key:
+    post:
+      operationId: addKeyToInstance
+      tags:
+      - Instances
+      summary: Add an SSH key to a specific instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceAddKeyRequest'
+      responses:
+        '200':
+          description: Key added
+          content:
+            application/json:
+              schema:
+                type: object
+  /instances/{id}/ports:
+    patch:
+      operationId: updateInstancePorts
+      tags:
+      - Instances
+      summary: Atomically add or remove forwarded HTTP ports for an instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortUpdateRequest'
+      responses:
+        '200':
+          description: Ports updated
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    InstanceAddKeyRequest:
+      type: object
+      properties:
+        public_key:
+          type: string
+    InstanceMode:
+      type: string
+      description: Instance tier - development or production.
+      enum:
+      - prototyping
+      - production
+    InstanceCreateResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        identifier:
+          type: string
+    InstanceCreateRequest:
+      type: object
+      required:
+      - cpu_cores
+      - disk_size_gb
+      - gpu_type
+      - mode
+      - num_gpus
+      - template
+      properties:
+        cpu_cores:
+          type: integer
+          description: Number of vCPU cores.
+        disk_size_gb:
+          type: integer
+          description: Persistent disk size in GB.
+        ephemeral_disk_gb:
+          type: integer
+          description: Optional ephemeral disk size in GB.
+        gpu_type:
+          type: string
+          description: GPU model, e.g. t4, a100, a100xl, l40s, h100.
+        mode:
+          $ref: '#/components/schemas/InstanceMode'
+        num_gpus:
+          type: integer
+          description: Number of GPUs to attach.
+        public_key:
+          type: string
+          description: Optional SSH public key to inject at creation.
+        template:
+          type: string
+          description: Thunder template used to seed the instance.
+    PortUpdateRequest:
+      type: object
+      properties:
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
+    InstanceModifyRequest:
+      type: object
+      properties:
+        cpu_cores:
+          type: integer
+        disk_size_gb:
+          type: integer
+        ephemeral_disk_gb:
+          type: integer
+        gpu_type:
+          type: string
+        mode:
+          $ref: '#/components/schemas/InstanceMode'
+        num_gpus:
+          type: integer
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
+    InstanceListItem:
+      type: object
+      properties:
+        id:
+          type: string
+        uuid:
+          type: string
+        status:
+          type: string
+        gpuType:
+          type: string
+        numGpus:
+          type: string
+        cpuCores:
+          type: string
+        memory:
+          type: string
+        mode:
+          type: string
+        storage:
+          type: integer
+        ephemeralDiskGB:
+          type: integer
+        ip:
+          type: string
+        port:
+          type: integer
+        httpPorts:
+          type: array
+          items:
+            type: integer
+        template:
+          type: string
+        createdAt:
+          type: string
+    InstanceListResponse:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/InstanceListItem'
+  parameters:
+    InstanceId:
+      name: id
+      in: path
+      required: true
+      description: The instance identifier.
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      description: API token generated in the Thunder Compute console (console.thundercompute.com/settings/tokens), sent as a Bearer token in the Authorization header. The tnr CLI reads it from the TNR_API_TOKEN environment variable.

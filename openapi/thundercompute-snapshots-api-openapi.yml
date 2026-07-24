@@ -1,0 +1,99 @@
+openapi: 3.0.1
+info:
+  title: Thunder Compute Instances Snapshots API
+  description: REST API for Thunder Compute, a low-cost GPU cloud offering on-demand virtual GPU instances billed per minute. The API manages instance lifecycle (create, list, modify, delete), SSH key attachment, forwarded HTTP ports, snapshots, account SSH keys, API tokens, and read-only pricing and GPU specifications. The tnr CLI and the Thunder Compute Terraform provider are both clients of this same API. Endpoints and schemas mirror the published OpenAPI document at https://api.thundercompute.com:8443/openapi.json.
+  termsOfService: https://www.thundercompute.com/terms
+  contact:
+    name: Thunder Compute Support
+    email: support@thundercompute.com
+  version: '1.0'
+servers:
+- url: https://api.thundercompute.com:8443/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Snapshots
+paths:
+  /snapshots/create:
+    post:
+      operationId: createSnapshot
+      tags:
+      - Snapshots
+      summary: Create a snapshot from a running instance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSnapshotRequest'
+      responses:
+        '200':
+          description: Snapshot created
+          content:
+            application/json:
+              schema:
+                type: object
+  /snapshots/list:
+    get:
+      operationId: listSnapshots
+      tags:
+      - Snapshots
+      summary: List all snapshots for the account.
+      responses:
+        '200':
+          description: A list of snapshots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Snapshot'
+  /snapshots/{id}:
+    delete:
+      operationId: deleteSnapshot
+      tags:
+      - Snapshots
+      summary: Delete a snapshot.
+      parameters:
+      - $ref: '#/components/parameters/SnapshotId'
+      responses:
+        '200':
+          description: Snapshot deleted
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    CreateSnapshotRequest:
+      type: object
+      required:
+      - instanceId
+      - name
+      properties:
+        instanceId:
+          type: string
+        name:
+          type: string
+    Snapshot:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+  parameters:
+    SnapshotId:
+      name: id
+      in: path
+      required: true
+      description: The snapshot identifier.
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      description: API token generated in the Thunder Compute console (console.thundercompute.com/settings/tokens), sent as a Bearer token in the Authorization header. The tnr CLI reads it from the TNR_API_TOKEN environment variable.
