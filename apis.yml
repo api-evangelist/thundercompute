@@ -8,7 +8,20 @@ description: Thunder Compute is a low-cost GPU cloud offering on-demand virtual 
   REST API at https://api.thundercompute.com:8443/v1 for creating, listing,
   modifying, and deleting instances, managing snapshots and SSH keys, and reading
   pricing/specs. A Terraform provider wraps the same API.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/thundercompute.png
 tags:
 - GPU
 - Cloud
@@ -19,76 +32,6 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: thundercompute:thundercompute-instances-api
-  name: Thunder Compute Instances API
-  tags:
-  - Instances
-  - GPU
-  - Compute
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.thundercompute.com/docs
-  baseURL: https://api.thundercompute.com:8443/v1
-  properties:
-  - url: https://www.thundercompute.com/docs
-    type: Documentation
-  - url: https://api.thundercompute.com:8443/openapi.json
-    type: APIReference
-  - url: openapi/thundercompute-openapi.yml
-    type: OpenAPI
-  - url: collections/thundercompute.postman_collection.json
-    type: PostmanCollection
-  - url: collections/thundercompute.opencollection.json
-    type: OpenCollection
-  description: REST endpoints to create, list, modify, and delete on-demand virtual
-    GPU instances, add SSH keys to an instance, and update forwarded HTTP ports.
-    Instance configuration covers GPU type, GPU count, vCPU cores, disk size, and
-    development vs. production mode.
-- aid: thundercompute:thundercompute-snapshots-api
-  name: Thunder Compute Snapshots API
-  tags:
-  - Snapshots
-  - Storage
-  - Templates
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.thundercompute.com/docs
-  baseURL: https://api.thundercompute.com:8443/v1
-  properties:
-  - url: https://www.thundercompute.com/docs
-    type: Documentation
-  - url: https://api.thundercompute.com:8443/openapi.json
-    type: APIReference
-  - url: openapi/thundercompute-openapi.yml
-    type: OpenAPI
-  - url: collections/thundercompute.postman_collection.json
-    type: PostmanCollection
-  - url: collections/thundercompute.opencollection.json
-    type: OpenCollection
-  description: Create, list, and delete snapshots captured from running instances
-    for long-term storage, plus read available Thunder templates used to seed new
-    instances.
-- aid: thundercompute:thundercompute-account-api
-  name: Thunder Compute Account API
-  tags:
-  - SSH Keys
-  - Tokens
-  - Pricing
-  - Specs
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.thundercompute.com/docs
-  baseURL: https://api.thundercompute.com:8443/v1
-  properties:
-  - url: https://www.thundercompute.com/docs
-    type: Documentation
-  - url: https://api.thundercompute.com:8443/openapi.json
-    type: APIReference
-  - url: openapi/thundercompute-openapi.yml
-    type: OpenAPI
-  - url: collections/thundercompute.postman_collection.json
-    type: PostmanCollection
-  - url: collections/thundercompute.opencollection.json
-    type: OpenCollection
-  description: Account-level utility endpoints to add, list, and delete account SSH
-    keys, list API tokens, and read current GPU pricing and hardware specifications.
 - aid: thundercompute:thundercompute-cli
   name: Thunder Compute CLI (tnr)
   tags:
@@ -103,10 +46,136 @@ apis:
     type: Documentation
   - url: https://github.com/Thunder-Compute/thunder-cli
     type: SourceCode
-  description: The tnr command-line interface is the primary developer surface for
-    Thunder Compute, wrapping the REST API to log in, create, connect to, snapshot,
-    and delete GPU instances and transfer files. Authenticates with an API token
-    set via TNR_API_TOKEN.
+  description: >-
+    The tnr command-line interface is the primary developer surface for Thunder Compute, wrapping the
+    REST API to log in, create, connect to, snapshot, and delete GPU instances and transfer files. Authenticates
+    with an API token set via TNR_API_TOKEN.
+- aid: thundercompute:thundercompute-instances-api
+  name: Thunder Compute Instances API
+  description: The Instances API from Thunder Compute — 6 operation(s) for instances.
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  tags:
+  - Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/thundercompute-instances-api-openapi.yml
+  - type: Documentation
+    url: https://www.thundercompute.com/docs
+  - type: APIReference
+    url: https://api.thundercompute.com:8443/openapi.json
+  - type: PostmanCollection
+    url: collections/thundercompute.postman_collection.json
+  - type: OpenCollection
+    url: collections/thundercompute.opencollection.json
+- aid: thundercompute:thundercompute-pricing-api
+  name: Thunder Compute Pricing API
+  description: The Pricing API from Thunder Compute — 1 operation(s) for pricing.
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  tags:
+  - Pricing
+  properties:
+  - type: OpenAPI
+    url: openapi/thundercompute-pricing-api-openapi.yml
+  - type: Documentation
+    url: https://www.thundercompute.com/docs
+  - type: APIReference
+    url: https://api.thundercompute.com:8443/openapi.json
+  - type: PostmanCollection
+    url: collections/thundercompute.postman_collection.json
+  - type: OpenCollection
+    url: collections/thundercompute.opencollection.json
+- aid: thundercompute:thundercompute-snapshots-api
+  name: Thunder Compute Snapshots API
+  description: The Snapshots API from Thunder Compute — 3 operation(s) for snapshots.
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  tags:
+  - Snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/thundercompute-snapshots-api-openapi.yml
+  - type: Documentation
+    url: https://www.thundercompute.com/docs
+  - type: APIReference
+    url: https://api.thundercompute.com:8443/openapi.json
+  - type: PostmanCollection
+    url: collections/thundercompute.postman_collection.json
+  - type: OpenCollection
+    url: collections/thundercompute.opencollection.json
+- aid: thundercompute:thundercompute-specs-api
+  name: Thunder Compute Specs API
+  description: The Specs API from Thunder Compute — 1 operation(s) for specs.
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  tags:
+  - Specs
+  properties:
+  - type: OpenAPI
+    url: openapi/thundercompute-specs-api-openapi.yml
+  - type: Documentation
+    url: https://www.thundercompute.com/docs
+  - type: APIReference
+    url: https://api.thundercompute.com:8443/openapi.json
+  - type: PostmanCollection
+    url: collections/thundercompute.postman_collection.json
+  - type: OpenCollection
+    url: collections/thundercompute.opencollection.json
+- aid: thundercompute:thundercompute-ssh-keys-api
+  name: Thunder Compute SSH Keys API
+  description: The SSH Keys API from Thunder Compute — 3 operation(s) for ssh keys.
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  tags:
+  - SSH Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/thundercompute-ssh-keys-api-openapi.yml
+  - type: Documentation
+    url: https://www.thundercompute.com/docs
+  - type: APIReference
+    url: https://api.thundercompute.com:8443/openapi.json
+  - type: PostmanCollection
+    url: collections/thundercompute.postman_collection.json
+  - type: OpenCollection
+    url: collections/thundercompute.opencollection.json
+- aid: thundercompute:thundercompute-templates-api
+  name: Thunder Compute Templates API
+  description: The Templates API from Thunder Compute — 1 operation(s) for templates.
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/thundercompute-templates-api-openapi.yml
+  - type: Documentation
+    url: https://www.thundercompute.com/docs
+  - type: APIReference
+    url: https://api.thundercompute.com:8443/openapi.json
+  - type: PostmanCollection
+    url: collections/thundercompute.postman_collection.json
+  - type: OpenCollection
+    url: collections/thundercompute.opencollection.json
+- aid: thundercompute:thundercompute-tokens-api
+  name: Thunder Compute Tokens API
+  description: The Tokens API from Thunder Compute — 1 operation(s) for tokens.
+  humanURL: https://www.thundercompute.com/docs
+  baseURL: https://api.thundercompute.com:8443/v1
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/thundercompute-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://www.thundercompute.com/docs
+  - type: APIReference
+    url: https://api.thundercompute.com:8443/openapi.json
+  - type: PostmanCollection
+    url: collections/thundercompute.postman_collection.json
+  - type: OpenCollection
+    url: collections/thundercompute.opencollection.json
 common:
 - type: AgenticAccess
   url: agentic-access/thundercompute-agentic-access.yml
