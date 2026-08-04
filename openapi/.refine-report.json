@@ -1,0 +1,26 @@
+{
+  "provider": "thundercompute",
+  "sources": [
+    "thundercompute-instances-api-openapi.yml",
+    "thundercompute-pricing-api-openapi.yml",
+    "thundercompute-snapshots-api-openapi.yml",
+    "thundercompute-specs-api-openapi.yml",
+    "thundercompute-ssh-keys-api-openapi.yml",
+    "thundercompute-templates-api-openapi.yml",
+    "thundercompute-tokens-api-openapi.yml"
+  ],
+  "outputs": [
+    "thundercompute-instances-api-openapi.yml",
+    "thundercompute-pricing-api-openapi.yml",
+    "thundercompute-snapshots-api-openapi.yml",
+    "thundercompute-specs-api-openapi.yml",
+    "thundercompute-ssh-keys-api-openapi.yml",
+    "thundercompute-templates-api-openapi.yml",
+    "thundercompute-tokens-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
