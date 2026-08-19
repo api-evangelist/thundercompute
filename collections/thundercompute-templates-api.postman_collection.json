@@ -1,0 +1,116 @@
+{
+  "item": [
+    {
+      "id": "1a54493c-8c87-4217-90a9-224e32a45e23",
+      "name": "Templates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f530e02-1e4e-46f2-a7d5-542fab5fa126",
+          "name": "Get available Thunder templates for instance creation.",
+          "request": {
+            "name": "Get available Thunder templates for instance creation.",
+            "description": {},
+            "url": {
+              "path": [
+                "thunder-templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59907c48-3eab-4662-83ed-ddefea054d23",
+              "name": "Available templates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "thunder-templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.thundercompute.com:8443/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4341faaf-a679-4c7b-8f36-0fd7d1ccc9f8",
+    "name": "Thunder Compute Instances Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Thunder Compute, a low-cost GPU cloud offering on-demand virtual GPU instances billed per minute. The API manages instance lifecycle (create, list, modify, delete), SSH key attachment, forwarded HTTP ports, snapshots, account SSH keys, API tokens, and read-only pricing and GPU specifications. The tnr CLI and the Thunder Compute Terraform provider are both clients of this same API. Endpoints and schemas mirror the published OpenAPI document at https://api.thundercompute.com:8443/openapi.json.\n\nContact Support:\n Name: Thunder Compute Support\n Email: support@thundercompute.com",
+      "type": "text/plain"
+    }
+  }
+}

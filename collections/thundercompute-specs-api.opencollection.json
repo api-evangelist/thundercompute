@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thunder Compute Instances Specs API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Specs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get available GPU specifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/specs"
+          },
+          "docs": "Get available GPU specifications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thunder Compute Instances Templates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get available Thunder templates for instance creation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.thundercompute.com:8443/v1/thunder-templates"
+          },
+          "docs": "Get available Thunder templates for instance creation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,659 @@
+{
+  "item": [
+    {
+      "id": "baf11993-dbde-4c02-ad45-91f3837c4717",
+      "name": "Instances",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb3662a5-1143-491a-9137-37cdf47425f3",
+          "name": "Create a new on-demand GPU instance.",
+          "request": {
+            "name": "Create a new on-demand GPU instance.",
+            "description": {},
+            "url": {
+              "path": [
+                "instances",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpu_cores\": \"<integer>\",\n  \"disk_size_gb\": \"<integer>\",\n  \"gpu_type\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"num_gpus\": \"<integer>\",\n  \"template\": \"<string>\",\n  \"ephemeral_disk_gb\": \"<integer>\",\n  \"public_key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82fc028f-1dbb-4c68-967c-f217ca078212",
+              "name": "Instance created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cpu_cores\": \"<integer>\",\n  \"disk_size_gb\": \"<integer>\",\n  \"gpu_type\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"num_gpus\": \"<integer>\",\n  \"template\": \"<string>\",\n  \"ephemeral_disk_gb\": \"<integer>\",\n  \"public_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"string\",\n  \"identifier\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d4164f1-426e-48bd-a712-dd7f34c24c34",
+          "name": "List all instances for the authenticated account.",
+          "request": {
+            "name": "List all instances for the authenticated account.",
+            "description": {},
+            "url": {
+              "path": [
+                "instances",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24f60cc3-ca30-4b9c-9ee8-8f927fd27125",
+              "name": "A list of instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"id\": \"string\",\n    \"uuid\": \"string\",\n    \"status\": \"string\",\n    \"gpuType\": \"string\",\n    \"numGpus\": \"string\",\n    \"cpuCores\": \"string\",\n    \"memory\": \"string\",\n    \"mode\": \"string\",\n    \"storage\": 5424,\n    \"ephemeralDiskGB\": 4206,\n    \"ip\": \"string\",\n    \"port\": 9360,\n    \"httpPorts\": [\n      9703,\n      3625\n    ],\n    \"template\": \"string\",\n    \"createdAt\": \"string\"\n  },\n  \"key_1\": {\n    \"id\": \"string\",\n    \"uuid\": \"string\",\n    \"status\": \"string\",\n    \"gpuType\": \"string\",\n    \"numGpus\": \"string\",\n    \"cpuCores\": \"string\",\n    \"memory\": \"string\",\n    \"mode\": \"string\",\n    \"storage\": 5637,\n    \"ephemeralDiskGB\": 2042,\n    \"ip\": \"string\",\n    \"port\": 4570,\n    \"httpPorts\": [\n      5969,\n      4470\n    ],\n    \"template\": \"string\",\n    \"createdAt\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8407ae98-5798-4a77-a6f8-1d8f6678cdd3",
+          "name": "Modify an existing instance configuration.",
+          "request": {
+            "name": "Modify an existing instance configuration.",
+            "description": {},
+            "url": {
+              "path": [
+                "instances",
+                ":id",
+                "modify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The instance identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpu_cores\": \"<integer>\",\n  \"disk_size_gb\": \"<integer>\",\n  \"ephemeral_disk_gb\": \"<integer>\",\n  \"gpu_type\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"num_gpus\": \"<integer>\",\n  \"add_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"remove_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2996247d-df19-4c23-9460-a20cef98a647",
+              "name": "Instance modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":id",
+                    "modify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cpu_cores\": \"<integer>\",\n  \"disk_size_gb\": \"<integer>\",\n  \"ephemeral_disk_gb\": \"<integer>\",\n  \"gpu_type\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"num_gpus\": \"<integer>\",\n  \"add_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"remove_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d40efab-4ddf-491c-898f-afc15ea86641",
+          "name": "Delete an instance.",
+          "request": {
+            "name": "Delete an instance.",
+            "description": {},
+            "url": {
+              "path": [
+                "instances",
+                ":id",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The instance identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e5998a3-9e93-4766-8fbd-e47fc493b691",
+              "name": "Instance deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5423a0ab-6972-46f3-83f7-8f0f72893ff6",
+          "name": "Add an SSH key to a specific instance.",
+          "request": {
+            "name": "Add an SSH key to a specific instance.",
+            "description": {},
+            "url": {
+              "path": [
+                "instances",
+                ":id",
+                "add_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The instance identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"public_key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "328f7bf3-75b4-4bd3-9160-f9322b6205e4",
+              "name": "Key added",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":id",
+                    "add_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"public_key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f82a707-0fcf-46b8-bd8d-8cfcbeaf4150",
+          "name": "Atomically add or remove forwarded HTTP ports for an instance.",
+          "request": {
+            "name": "Atomically add or remove forwarded HTTP ports for an instance.",
+            "description": {},
+            "url": {
+              "path": [
+                "instances",
+                ":id",
+                "ports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The instance identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"add_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"remove_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d99d519-a5a3-471d-a262-e5258e9cb2a3",
+              "name": "Ports updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":id",
+                    "ports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"remove_ports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.thundercompute.com:8443/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4f4e0bea-4003-4e9d-bb45-87ce2d3400ef",
+    "name": "Thunder Compute Instances API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Thunder Compute, a low-cost GPU cloud offering on-demand virtual GPU instances billed per minute. The API manages instance lifecycle (create, list, modify, delete), SSH key attachment, forwarded HTTP ports, snapshots, account SSH keys, API tokens, and read-only pricing and GPU specifications. The tnr CLI and the Thunder Compute Terraform provider are both clients of this same API. Endpoints and schemas mirror the published OpenAPI document at https://api.thundercompute.com:8443/openapi.json.\n\nContact Support:\n Name: Thunder Compute Support\n Email: support@thundercompute.com",
+      "type": "text/plain"
+    }
+  }
+}
