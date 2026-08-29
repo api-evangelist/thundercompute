@@ -8,6 +8,19 @@ description: Thunder Compute is a low-cost GPU cloud offering on-demand virtual 
   REST API at https://api.thundercompute.com:8443/v1 for creating, listing,
   modifying, and deleting instances, managing snapshots and SSH keys, and reading
   pricing/specs. A Terraform provider wraps the same API.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
