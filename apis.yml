@@ -196,6 +196,9 @@ apis:
   - type: OpenCollection
     url: collections/thundercompute.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/thundercompute-capability-edges.yml
+  name: Thunder Compute Business Capability Map
 - type: AgenticAccess
   url: agentic-access/thundercompute-agentic-access.yml
 - type: DomainSecurity
