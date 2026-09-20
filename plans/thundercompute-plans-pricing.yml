@@ -10,6 +10,10 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: developer-api
 pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: keyword-prefilter
+  read: '2026-09-20'
 published: true
 note: GPU cloud priced per GPU-hour, billed per minute; add-ons for storage, snapshots, vCPUs. Page also
   includes a competitor price comparison table. No data egress fees per FAQ.
