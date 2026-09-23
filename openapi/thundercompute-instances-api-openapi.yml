@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Thunder Compute Instances API
-  description: REST API for Thunder Compute, a low-cost GPU cloud offering on-demand virtual GPU instances billed per minute. The API manages instance lifecycle (create, list, modify, delete), SSH key attachment, forwarded HTTP ports, snapshots, account SSH keys, API tokens, and read-only pricing and GPU specifications. The tnr CLI and the Thunder Compute Terraform provider are both clients of this same API. Endpoints and schemas mirror the published OpenAPI document at https://api.thundercompute.com:8443/openapi.json.
+  description: REST API for Thunder Compute, a low-cost GPU cloud offering on-demand virtual GPU instances billed per minute.
   termsOfService: https://www.thundercompute.com/terms
   contact:
     name: Thunder Compute Support
@@ -19,7 +19,7 @@ paths:
       operationId: createInstance
       tags:
       - Instances
-      summary: Create a new on-demand GPU instance.
+      summary: Create a new on-demand GPU instance
       requestBody:
         required: true
         content:
@@ -38,7 +38,7 @@ paths:
       operationId: listInstances
       tags:
       - Instances
-      summary: List all instances for the authenticated account.
+      summary: List all instances for the authenticated account
       responses:
         '200':
           description: A list of instances
@@ -51,7 +51,7 @@ paths:
       operationId: modifyInstance
       tags:
       - Instances
-      summary: Modify an existing instance configuration.
+      summary: Modify an existing instance configuration
       parameters:
       - $ref: '#/components/parameters/InstanceId'
       requestBody:
@@ -72,7 +72,7 @@ paths:
       operationId: deleteInstance
       tags:
       - Instances
-      summary: Delete an instance.
+      summary: Delete an instance
       parameters:
       - $ref: '#/components/parameters/InstanceId'
       responses:
@@ -87,7 +87,7 @@ paths:
       operationId: addKeyToInstance
       tags:
       - Instances
-      summary: Add an SSH key to a specific instance.
+      summary: Add an SSH key to a specific instance
       parameters:
       - $ref: '#/components/parameters/InstanceId'
       requestBody:
@@ -108,7 +108,7 @@ paths:
       operationId: updateInstancePorts
       tags:
       - Instances
-      summary: Atomically add or remove forwarded HTTP ports for an instance.
+      summary: Atomically add or remove forwarded HTTP ports for an instance
       parameters:
       - $ref: '#/components/parameters/InstanceId'
       requestBody:
@@ -126,23 +126,85 @@ paths:
                 type: object
 components:
   schemas:
-    InstanceAddKeyRequest:
+    InstanceModifyRequest:
       type: object
       properties:
-        public_key:
+        cpu_cores:
+          type: integer
+        disk_size_gb:
+          type: integer
+        ephemeral_disk_gb:
+          type: integer
+        gpu_type:
           type: string
+        mode:
+          $ref: '#/components/schemas/InstanceMode'
+        num_gpus:
+          type: integer
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
+    InstanceListResponse:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/InstanceListItem'
     InstanceMode:
       type: string
       description: Instance tier - development or production.
       enum:
       - prototyping
       - production
+    InstanceAddKeyRequest:
+      type: object
+      properties:
+        public_key:
+          type: string
     InstanceCreateResponse:
       type: object
       properties:
         uuid:
           type: string
         identifier:
+          type: string
+    InstanceListItem:
+      type: object
+      properties:
+        id:
+          type: string
+        uuid:
+          type: string
+        status:
+          type: string
+        gpuType:
+          type: string
+        numGpus:
+          type: string
+        cpuCores:
+          type: string
+        memory:
+          type: string
+        mode:
+          type: string
+        storage:
+          type: integer
+        ephemeralDiskGB:
+          type: integer
+        ip:
+          type: string
+        port:
+          type: integer
+        httpPorts:
+          type: array
+          items:
+            type: integer
+        template:
+          type: string
+        createdAt:
           type: string
     InstanceCreateRequest:
       type: object
@@ -188,68 +250,6 @@ components:
           type: array
           items:
             type: integer
-    InstanceModifyRequest:
-      type: object
-      properties:
-        cpu_cores:
-          type: integer
-        disk_size_gb:
-          type: integer
-        ephemeral_disk_gb:
-          type: integer
-        gpu_type:
-          type: string
-        mode:
-          $ref: '#/components/schemas/InstanceMode'
-        num_gpus:
-          type: integer
-        add_ports:
-          type: array
-          items:
-            type: integer
-        remove_ports:
-          type: array
-          items:
-            type: integer
-    InstanceListItem:
-      type: object
-      properties:
-        id:
-          type: string
-        uuid:
-          type: string
-        status:
-          type: string
-        gpuType:
-          type: string
-        numGpus:
-          type: string
-        cpuCores:
-          type: string
-        memory:
-          type: string
-        mode:
-          type: string
-        storage:
-          type: integer
-        ephemeralDiskGB:
-          type: integer
-        ip:
-          type: string
-        port:
-          type: integer
-        httpPorts:
-          type: array
-          items:
-            type: integer
-        template:
-          type: string
-        createdAt:
-          type: string
-    InstanceListResponse:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/InstanceListItem'
   parameters:
     InstanceId:
       name: id

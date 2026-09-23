@@ -1,26 +1,39 @@
 {
   "provider": "thundercompute",
   "sources": [
-    "thundercompute-instances-api-openapi.yml",
-    "thundercompute-pricing-api-openapi.yml",
-    "thundercompute-snapshots-api-openapi.yml",
-    "thundercompute-specs-api-openapi.yml",
-    "thundercompute-ssh-keys-api-openapi.yml",
-    "thundercompute-templates-api-openapi.yml",
-    "thundercompute-tokens-api-openapi.yml"
+    "_original/thundercompute-openapi.yml"
   ],
   "outputs": [
     "thundercompute-instances-api-openapi.yml",
     "thundercompute-pricing-api-openapi.yml",
+    "thundercompute-ssh-keys-api-openapi.yml",
     "thundercompute-snapshots-api-openapi.yml",
     "thundercompute-specs-api-openapi.yml",
-    "thundercompute-ssh-keys-api-openapi.yml",
     "thundercompute-templates-api-openapi.yml",
     "thundercompute-tokens-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "thundercompute-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "thundercompute-openapi.yml: declared missing tag: Instances",
+    "thundercompute-openapi.yml: declared missing tag: Pricing",
+    "thundercompute-openapi.yml: declared missing tag: SSH Keys",
+    "thundercompute-openapi.yml: declared missing tag: Snapshots",
+    "thundercompute-openapi.yml: declared missing tag: Specs",
+    "thundercompute-openapi.yml: declared missing tag: Templates",
+    "thundercompute-openapi.yml: declared missing tag: Tokens",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "thundercompute-instances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "thundercompute-pricing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "thundercompute-snapshots-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "thundercompute-specs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "thundercompute-ssh-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "thundercompute-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "thundercompute-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
