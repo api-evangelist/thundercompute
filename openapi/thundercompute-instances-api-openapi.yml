@@ -126,51 +126,39 @@ paths:
                 type: object
 components:
   schemas:
-    InstanceModifyRequest:
+    InstanceCreateRequest:
       type: object
+      required:
+      - cpu_cores
+      - disk_size_gb
+      - gpu_type
+      - mode
+      - num_gpus
+      - template
       properties:
         cpu_cores:
           type: integer
+          description: Number of vCPU cores.
         disk_size_gb:
           type: integer
+          description: Persistent disk size in GB.
         ephemeral_disk_gb:
           type: integer
+          description: Optional ephemeral disk size in GB.
         gpu_type:
           type: string
+          description: GPU model, e.g. t4, a100, a100xl, l40s, h100.
         mode:
           $ref: '#/components/schemas/InstanceMode'
         num_gpus:
           type: integer
-        add_ports:
-          type: array
-          items:
-            type: integer
-        remove_ports:
-          type: array
-          items:
-            type: integer
-    InstanceListResponse:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/InstanceListItem'
-    InstanceMode:
-      type: string
-      description: Instance tier - development or production.
-      enum:
-      - prototyping
-      - production
-    InstanceAddKeyRequest:
-      type: object
-      properties:
+          description: Number of GPUs to attach.
         public_key:
           type: string
-    InstanceCreateResponse:
-      type: object
-      properties:
-        uuid:
+          description: Optional SSH public key to inject at creation.
+        template:
           type: string
-        identifier:
-          type: string
+          description: Thunder template used to seed the instance.
     InstanceListItem:
       type: object
       properties:
@@ -206,39 +194,42 @@ components:
           type: string
         createdAt:
           type: string
-    InstanceCreateRequest:
+    InstanceCreateResponse:
       type: object
-      required:
-      - cpu_cores
-      - disk_size_gb
-      - gpu_type
-      - mode
-      - num_gpus
-      - template
+      properties:
+        uuid:
+          type: string
+        identifier:
+          type: string
+    InstanceModifyRequest:
+      type: object
       properties:
         cpu_cores:
           type: integer
-          description: Number of vCPU cores.
         disk_size_gb:
           type: integer
-          description: Persistent disk size in GB.
         ephemeral_disk_gb:
           type: integer
-          description: Optional ephemeral disk size in GB.
         gpu_type:
           type: string
-          description: GPU model, e.g. t4, a100, a100xl, l40s, h100.
         mode:
           $ref: '#/components/schemas/InstanceMode'
         num_gpus:
           type: integer
-          description: Number of GPUs to attach.
-        public_key:
-          type: string
-          description: Optional SSH public key to inject at creation.
-        template:
-          type: string
-          description: Thunder template used to seed the instance.
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
+    InstanceMode:
+      type: string
+      description: Instance tier - development or production.
+      enum:
+      - prototyping
+      - production
     PortUpdateRequest:
       type: object
       properties:
@@ -250,6 +241,15 @@ components:
           type: array
           items:
             type: integer
+    InstanceListResponse:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/InstanceListItem'
+    InstanceAddKeyRequest:
+      type: object
+      properties:
+        public_key:
+          type: string
   parameters:
     InstanceId:
       name: id

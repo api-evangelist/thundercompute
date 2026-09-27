@@ -64,6 +64,14 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    SnapshotId:
+      name: id
+      in: path
+      required: true
+      description: The snapshot identifier.
+      schema:
+        type: string
   schemas:
     CreateSnapshotRequest:
       type: object
@@ -84,14 +92,6 @@ components:
           type: string
         createdAt:
           type: string
-  parameters:
-    SnapshotId:
-      name: id
-      in: path
-      required: true
-      description: The snapshot identifier.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: http
