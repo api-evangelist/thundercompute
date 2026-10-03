@@ -69,21 +69,21 @@ paths:
                 type: object
 components:
   schemas:
+    SSHKey:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        public_key:
+          type: string
     SSHKeyAddRequest:
       type: object
       required:
       - name
       - public_key
       properties:
-        name:
-          type: string
-        public_key:
-          type: string
-    SSHKey:
-      type: object
-      properties:
-        id:
-          type: string
         name:
           type: string
         public_key:

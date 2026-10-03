@@ -73,6 +73,15 @@ components:
       schema:
         type: string
   schemas:
+    Snapshot:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
     CreateSnapshotRequest:
       type: object
       required:
@@ -82,15 +91,6 @@ components:
         instanceId:
           type: string
         name:
-          type: string
-    Snapshot:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        createdAt:
           type: string
   securitySchemes:
     ApiKeyAuth:

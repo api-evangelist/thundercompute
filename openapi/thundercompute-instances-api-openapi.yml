@@ -126,6 +126,40 @@ paths:
                 type: object
 components:
   schemas:
+    InstanceModifyRequest:
+      type: object
+      properties:
+        cpu_cores:
+          type: integer
+        disk_size_gb:
+          type: integer
+        ephemeral_disk_gb:
+          type: integer
+        gpu_type:
+          type: string
+        mode:
+          $ref: '#/components/schemas/InstanceMode'
+        num_gpus:
+          type: integer
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
+    PortUpdateRequest:
+      type: object
+      properties:
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
     InstanceCreateRequest:
       type: object
       required:
@@ -159,6 +193,17 @@ components:
         template:
           type: string
           description: Thunder template used to seed the instance.
+    InstanceMode:
+      type: string
+      description: Instance tier - development or production.
+      enum:
+      - prototyping
+      - production
+    InstanceAddKeyRequest:
+      type: object
+      properties:
+        public_key:
+          type: string
     InstanceListItem:
       type: object
       properties:
@@ -201,55 +246,10 @@ components:
           type: string
         identifier:
           type: string
-    InstanceModifyRequest:
-      type: object
-      properties:
-        cpu_cores:
-          type: integer
-        disk_size_gb:
-          type: integer
-        ephemeral_disk_gb:
-          type: integer
-        gpu_type:
-          type: string
-        mode:
-          $ref: '#/components/schemas/InstanceMode'
-        num_gpus:
-          type: integer
-        add_ports:
-          type: array
-          items:
-            type: integer
-        remove_ports:
-          type: array
-          items:
-            type: integer
-    InstanceMode:
-      type: string
-      description: Instance tier - development or production.
-      enum:
-      - prototyping
-      - production
-    PortUpdateRequest:
-      type: object
-      properties:
-        add_ports:
-          type: array
-          items:
-            type: integer
-        remove_ports:
-          type: array
-          items:
-            type: integer
     InstanceListResponse:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/InstanceListItem'
-    InstanceAddKeyRequest:
-      type: object
-      properties:
-        public_key:
-          type: string
   parameters:
     InstanceId:
       name: id
