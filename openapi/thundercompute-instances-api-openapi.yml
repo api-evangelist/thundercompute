@@ -125,7 +125,31 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    InstanceId:
+      name: id
+      in: path
+      required: true
+      description: The instance identifier.
+      schema:
+        type: string
   schemas:
+    InstanceAddKeyRequest:
+      type: object
+      properties:
+        public_key:
+          type: string
+    PortUpdateRequest:
+      type: object
+      properties:
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
     InstanceModifyRequest:
       type: object
       properties:
@@ -141,17 +165,6 @@ components:
           $ref: '#/components/schemas/InstanceMode'
         num_gpus:
           type: integer
-        add_ports:
-          type: array
-          items:
-            type: integer
-        remove_ports:
-          type: array
-          items:
-            type: integer
-    PortUpdateRequest:
-      type: object
-      properties:
         add_ports:
           type: array
           items:
@@ -199,11 +212,6 @@ components:
       enum:
       - prototyping
       - production
-    InstanceAddKeyRequest:
-      type: object
-      properties:
-        public_key:
-          type: string
     InstanceListItem:
       type: object
       properties:
@@ -250,14 +258,6 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/InstanceListItem'
-  parameters:
-    InstanceId:
-      name: id
-      in: path
-      required: true
-      description: The instance identifier.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: http
