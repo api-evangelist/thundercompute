@@ -125,54 +125,7 @@ paths:
               schema:
                 type: object
 components:
-  parameters:
-    InstanceId:
-      name: id
-      in: path
-      required: true
-      description: The instance identifier.
-      schema:
-        type: string
   schemas:
-    InstanceAddKeyRequest:
-      type: object
-      properties:
-        public_key:
-          type: string
-    PortUpdateRequest:
-      type: object
-      properties:
-        add_ports:
-          type: array
-          items:
-            type: integer
-        remove_ports:
-          type: array
-          items:
-            type: integer
-    InstanceModifyRequest:
-      type: object
-      properties:
-        cpu_cores:
-          type: integer
-        disk_size_gb:
-          type: integer
-        ephemeral_disk_gb:
-          type: integer
-        gpu_type:
-          type: string
-        mode:
-          $ref: '#/components/schemas/InstanceMode'
-        num_gpus:
-          type: integer
-        add_ports:
-          type: array
-          items:
-            type: integer
-        remove_ports:
-          type: array
-          items:
-            type: integer
     InstanceCreateRequest:
       type: object
       required:
@@ -206,6 +159,52 @@ components:
         template:
           type: string
           description: Thunder template used to seed the instance.
+    PortUpdateRequest:
+      type: object
+      properties:
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
+    InstanceAddKeyRequest:
+      type: object
+      properties:
+        public_key:
+          type: string
+    InstanceCreateResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        identifier:
+          type: string
+    InstanceModifyRequest:
+      type: object
+      properties:
+        cpu_cores:
+          type: integer
+        disk_size_gb:
+          type: integer
+        ephemeral_disk_gb:
+          type: integer
+        gpu_type:
+          type: string
+        mode:
+          $ref: '#/components/schemas/InstanceMode'
+        num_gpus:
+          type: integer
+        add_ports:
+          type: array
+          items:
+            type: integer
+        remove_ports:
+          type: array
+          items:
+            type: integer
     InstanceMode:
       type: string
       description: Instance tier - development or production.
@@ -247,17 +246,18 @@ components:
           type: string
         createdAt:
           type: string
-    InstanceCreateResponse:
-      type: object
-      properties:
-        uuid:
-          type: string
-        identifier:
-          type: string
     InstanceListResponse:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/InstanceListItem'
+  parameters:
+    InstanceId:
+      name: id
+      in: path
+      required: true
+      description: The instance identifier.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: http
